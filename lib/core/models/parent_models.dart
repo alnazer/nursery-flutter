@@ -70,6 +70,49 @@ class Child {
       );
 }
 
+/// مرفق نشاط (صورة أو PDF) برابط موقّع مؤقّت.
+class ActivityFile {
+  const ActivityFile({
+    required this.id,
+    required this.name,
+    required this.mime,
+    required this.size,
+    required this.sizeLabel,
+    required this.isImage,
+    required this.url,
+  });
+
+  final int id;
+  final String name;
+  final String mime;
+  final int size;
+  final String sizeLabel;
+  final bool isImage;
+
+  /// رابط مؤقّت يُفتح بلا ترويسات (صالح ساعة).
+  final String url;
+
+  bool get isPdf => mime == 'application/pdf';
+
+  factory ActivityFile.fromJson(Map<String, dynamic> json) => ActivityFile(
+        id: (json['id'] as int?) ?? 0,
+        name: (json['name'] as String?) ?? '',
+        mime: (json['mime'] as String?) ?? '',
+        size: (json['size'] as num?)?.toInt() ?? 0,
+        sizeLabel: (json['size_label'] as String?) ?? '',
+        isImage: json['is_image'] == true,
+        url: '${json['url'] ?? ''}',
+      );
+
+  /// يقرأ مصفوفة `files` من أي رد.
+  static List<ActivityFile> listFrom(dynamic value) => value is List
+      ? value
+          .whereType<Map<dynamic, dynamic>>()
+          .map((Map<dynamic, dynamic> item) => ActivityFile.fromJson(Map<String, dynamic>.from(item)))
+          .toList()
+      : <ActivityFile>[];
+}
+
 class Activity {
   const Activity({
     required this.id,
@@ -82,6 +125,7 @@ class Activity {
     required this.publishedAt,
     this.pdfUrl,
     this.options = const <ActivityOption>[],
+    this.files = const <ActivityFile>[],
   });
 
   final int id;
@@ -94,6 +138,9 @@ class Activity {
   final DateTime? publishedAt;
   final String? pdfUrl;
   final List<ActivityOption> options;
+
+  /// المرفقات (صور أو PDF) — فارغة إن لم يُرفق شيء.
+  final List<ActivityFile> files;
 
   factory Activity.fromJson(Map<String, dynamic> json) {
     final Map<String, dynamic> student =
@@ -114,6 +161,7 @@ class Activity {
           .whereType<Map<dynamic, dynamic>>()
           .map((Map<dynamic, dynamic> item) => ActivityOption.fromJson(Map<String, dynamic>.from(item)))
           .toList(),
+      files: ActivityFile.listFrom(json['files']),
     );
   }
 }

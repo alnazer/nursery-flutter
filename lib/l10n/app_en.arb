@@ -512,5 +512,12 @@
   "markAbsentOneConfirm": "{name} will be marked absent today and the parent notified. Continue?",
   "absenceReason": "Absence reason",
   "saved": "Saved",
-  "studentActions": "Student actions"
+  "studentActions": "Student actions",
+  "attachAdd": "Add attachment",
+  "attachCamera": "Take a photo",
+  "attachGallery": "From gallery",
+  "attachHint": "Images or PDF, up to {max} files.",
+  "attachmentsCount": "Attachments ({count})",
+  "attachmentsLimit": "At most {max} attachments.",
+  "download": "Download"
 }

@@ -10,6 +10,7 @@ import '../../../core/util/formatters.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/app_widgets.dart';
 import '../../../widgets/child_avatar.dart';
+import '../../common/attachments_view.dart';
 import '../../common/detail_cubit.dart';
 import '../../common/list_views.dart';
 import '../../common/paged_cubit.dart';
@@ -197,6 +198,10 @@ class ActivityDetailPage extends StatelessWidget {
                 if (activity.note.isNotEmpty) ...<Widget>[
                   const SizedBox(height: 4),
                   SoftNote(text: activity.note, icon: Icons.edit_note_outlined),
+                ],
+                if (activity.files.isNotEmpty) ...<Widget>[
+                  const SizedBox(height: 18),
+                  AttachmentsView(files: activity.files),
                 ],
                 const SizedBox(height: 16),
                 _ActivityPdfButton(activity: activity),

@@ -784,5 +784,33 @@
   },
   "absenceReason": "سبب الغياب",
   "saved": "تم الحفظ",
-  "studentActions": "إجراءات الطالب"
+  "studentActions": "إجراءات الطالب",
+  "attachAdd": "إضافة مرفق",
+  "attachCamera": "التقاط صورة",
+  "attachGallery": "من معرض الصور",
+  "attachHint": "صور أو PDF، حتى {max} مرفقات.",
+  "@attachHint": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "attachmentsCount": "المرفقات ({count})",
+  "@attachmentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "attachmentsLimit": "الحد الأقصى {max} مرفقات.",
+  "@attachmentsLimit": {
+    "placeholders": {
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "download": "تحميل"
 }

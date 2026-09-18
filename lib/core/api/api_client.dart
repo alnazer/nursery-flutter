@@ -141,6 +141,36 @@ class ApiClient {
   }
 
   /// تنزيل ملف ثنائي من مسار محمي (مرفق إجازة، مستند). اسم الملف من Content-Disposition.
+  /// تنزيل رابط مطلق موقّع (مرفقات الأنشطة) — بلا ترويسات التطبيق لأن التوقيع في الرابط.
+  Future<DownloadedFile> downloadUrl(String url, {String fallbackName = 'file'}) async {
+    final Uri uri = Uri.parse(url);
+    try {
+      final HttpClientRequest request = await _http.openUrl('GET', uri).timeout(_timeout);
+      final HttpClientResponse response = await request.close().timeout(const Duration(seconds: 90));
+      final BytesBuilder builder = BytesBuilder();
+      await for (final List<int> chunk in response) {
+        builder.add(chunk);
+      }
+      final Uint8List bytes = builder.takeBytes();
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw ApiFailure(
+          code: ApiCode.serverError,
+          message: '',
+          status: response.statusCode,
+          path: uri.path,
+        );
+      }
+
+      return DownloadedFile(bytes: bytes, filename: _filename(response, fallbackName));
+    } on ApiFailure {
+      rethrow;
+    } on TimeoutException {
+      throw ApiFailure.network('timeout', path: uri.path);
+    } on SocketException catch (error) {
+      throw ApiFailure.network(error.message, path: uri.path);
+    }
+  }
+
   Future<DownloadedFile> download(String path, {String fallbackName = 'file'}) async {
     final Uri uri = Uri.parse('${config.baseUrl}${config.portalPrefix}$path');
     try {

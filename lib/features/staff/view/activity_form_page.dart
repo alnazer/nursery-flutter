@@ -9,7 +9,11 @@ import '../../../core/util/formatters.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/app_widgets.dart';
 import '../../../widgets/child_avatar.dart';
+import '../../../core/api/api_client.dart';
+import '../../../core/models/parent_models.dart';
 import '../../common/activity_window_note.dart';
+import '../../common/attachment_picker.dart';
+import '../../common/attachments_view.dart';
 import '../../common/detail_cubit.dart';
 import '../../common/list_views.dart';
 import '../../common/failure_view.dart';
@@ -25,6 +29,7 @@ class ActivityFormPage extends StatelessWidget {
     this.activityId,
     this.initialValues = const <String, dynamic>{},
     this.initialNote = '',
+    this.initialFiles = const <ActivityFile>[],
   });
 
   final int studentId;
@@ -35,6 +40,9 @@ class ActivityFormPage extends StatelessWidget {
   final int? activityId;
   final Map<String, dynamic> initialValues;
   final String initialNote;
+
+  /// مرفقات النشاط المحفوظة (وضع التعديل).
+  final List<ActivityFile> initialFiles;
 
   bool get isEdit => activityId != null;
 
@@ -59,6 +67,7 @@ class ActivityFormPage extends StatelessWidget {
     String? avatarUrl,
     Map<String, dynamic> values = const <String, dynamic>{},
     String note = '',
+    List<ActivityFile> files = const <ActivityFile>[],
   }) =>
       MaterialPageRoute<bool>(
         builder: (BuildContext context) => ActivityFormPage(
@@ -68,6 +77,7 @@ class ActivityFormPage extends StatelessWidget {
           activityId: activityId,
           initialValues: values,
           initialNote: note,
+          initialFiles: files,
         ),
       );
 
@@ -100,6 +110,7 @@ class ActivityFormPage extends StatelessWidget {
               activityId: activityId,
               initialValues: initialValues,
               initialNote: initialNote,
+              initialFiles: initialFiles,
             );
           },
         ),
@@ -117,6 +128,7 @@ class _FormBody extends StatefulWidget {
     required this.activityId,
     required this.initialValues,
     required this.initialNote,
+    required this.initialFiles,
   });
 
   final ActivityForm form;
@@ -126,6 +138,7 @@ class _FormBody extends StatefulWidget {
   final int? activityId;
   final Map<String, dynamic> initialValues;
   final String initialNote;
+  final List<ActivityFile> initialFiles;
 
   bool get isEdit => activityId != null;
 
@@ -139,8 +152,18 @@ class _FormBodyState extends State<_FormBody> {
   final Map<int, TextEditingController> _texts = <int, TextEditingController>{};
   final TextEditingController _note = TextEditingController();
 
+  /// مرفقات مختارة لم تُرفع بعد (وضع الإضافة) — تُرفع بعد حفظ النشاط.
+  final List<UploadFile> _pending = <UploadFile>[];
+
+  /// مرفقات محفوظة على الخادم (وضع التعديل).
+  late final List<ActivityFile> _files = List<ActivityFile>.from(widget.initialFiles);
+
+  /// أقصى عدد مرفقات للنشاط — نفس حدّ الخادم.
+  static const int _maxFiles = 5;
+
   bool _publish = false;
   bool _busy = false;
+  bool _uploading = false;
   ApiFailure? _failure;
 
   @override
@@ -216,6 +239,71 @@ class _FormBodyState extends State<_FormBody> {
     return options;
   }
 
+  /// إضافة مرفق: في التعديل يُرفع فوراً، وفي الإضافة ينتظر حفظ النشاط.
+  Future<void> _addAttachment() async {
+    final AppL10n l10n = AppL10n.of(context);
+    final int used = _files.length + _pending.length;
+    if (used >= _maxFiles) {
+      showInfoSnack(context, l10n.attachmentsLimit('$_maxFiles'));
+
+      return;
+    }
+    final UploadFile? file = await pickAttachment(context);
+    if (file == null || !mounted) {
+      return;
+    }
+    if (!widget.isEdit) {
+      setState(() => _pending.add(file));
+
+      return;
+    }
+    setState(() => _uploading = true);
+    try {
+      final List<ActivityFile> saved = await widget.api.uploadActivityFiles(widget.activityId!, <UploadFile>[file]);
+      if (mounted) {
+        setState(() {
+          _files.addAll(saved);
+          _uploading = false;
+        });
+      }
+    } on ApiFailure catch (failure) {
+      if (mounted) {
+        setState(() => _uploading = false);
+        showFailureSnack(context, failure);
+      }
+    }
+  }
+
+  Future<void> _deleteAttachment(ActivityFile file) async {
+    if (!widget.isEdit) {
+      return;
+    }
+    try {
+      await widget.api.deleteActivityFile(widget.activityId!, file.id);
+      if (mounted) {
+        setState(() => _files.removeWhere((ActivityFile row) => row.id == file.id));
+      }
+    } on ApiFailure catch (failure) {
+      if (mounted) {
+        showFailureSnack(context, failure);
+      }
+    }
+  }
+
+  /// رفع المرفقات المنتظرة بعد إنشاء النشاط — فشلها لا يُلغي النشاط المحفوظ.
+  Future<void> _uploadPending(int activityId) async {
+    if (_pending.isEmpty) {
+      return;
+    }
+    try {
+      await widget.api.uploadActivityFiles(activityId, _pending);
+    } on ApiFailure catch (failure) {
+      if (mounted) {
+        showFailureSnack(context, failure);
+      }
+    }
+  }
+
   Future<void> _submit() async {
     final AppL10n l10n = AppL10n.of(context);
     final Map<String, dynamic> options = _options();
@@ -232,13 +320,14 @@ class _FormBodyState extends State<_FormBody> {
       if (widget.isEdit) {
         await widget.api.updateActivity(id: widget.activityId!, options: options, note: note);
       } else {
-        await widget.api.storeActivity(
+        final Map<String, dynamic> created = await widget.api.storeActivity(
           studentId: widget.form.studentId,
           options: options,
           date: widget.form.date,
           note: note,
           publish: _publish,
         );
+        await _uploadPending((created['id'] as int?) ?? 0);
       }
       if (mounted) {
         showSuccessSnack(context, l10n.activitySaved);
@@ -343,6 +432,70 @@ class _FormBodyState extends State<_FormBody> {
               ),
             )),
         const SizedBox(height: 4),
+        // المرفقات: صور من الكاميرا أو المعرض أو ملف PDF
+        AppCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(Icons.attach_file, size: 18, color: colors.primaryInk),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      l10n.attachments,
+                      style: TextStyle(fontWeight: FontWeight.w700, color: colors.ink),
+                    ),
+                  ),
+                  if (_uploading)
+                    const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                  else
+                    TextButton.icon(
+                      onPressed: _addAttachment,
+                      icon: const Icon(Icons.add_a_photo_outlined, size: 18),
+                      label: Text(l10n.attachAdd),
+                    ),
+                ],
+              ),
+              if (_files.isNotEmpty) ...<Widget>[
+                const SizedBox(height: 8),
+                AttachmentsView(
+                  files: _files,
+                  title: false,
+                  onDelete: widget.isEdit ? _deleteAttachment : null,
+                ),
+              ],
+              if (_pending.isNotEmpty) ...<Widget>[
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: _pending
+                      .map((UploadFile file) => Chip(
+                            avatar: Icon(
+                              file.contentType.startsWith('image/')
+                                  ? Icons.image_outlined
+                                  : Icons.picture_as_pdf_outlined,
+                              size: 18,
+                              color: colors.primaryInk,
+                            ),
+                            label: Text(file.filename, overflow: TextOverflow.ellipsis),
+                            onDeleted: () => setState(() => _pending.remove(file)),
+                          ))
+                      .toList(),
+                ),
+              ],
+              if (_files.isEmpty && _pending.isEmpty) ...<Widget>[
+                const SizedBox(height: 4),
+                Text(
+                  l10n.attachHint('$_maxFiles'),
+                  style: TextStyle(color: colors.muted, fontSize: 12),
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
         TextField(
           controller: _note,
           maxLines: 3,

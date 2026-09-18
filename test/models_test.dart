@@ -323,4 +323,49 @@ void main() {
       );
     });
   });
+
+  group('مرفقات النشاط', () {
+    test('تُقرأ من رد النشاط بحقولها', () {
+      final Activity activity = Activity.fromJson(<String, dynamic>{
+        'id': 120,
+        'date': '2026-09-27',
+        'student': <String, dynamic>{'id': 33, 'name': 'سارة'},
+        'note': 'يوم جميل',
+        'files': <dynamic>[
+          <String, dynamic>{
+            'id': 8,
+            'name': 'day.jpg',
+            'mime': 'image/jpeg',
+            'size': 182044,
+            'size_label': '178 KB',
+            'is_image': true,
+            'url': 'https://example.com/api/v1/files/activity-files/8?signature=x',
+          },
+          <String, dynamic>{
+            'id': 9,
+            'name': 'report.pdf',
+            'mime': 'application/pdf',
+            'size': 20480,
+            'size_label': '20 KB',
+            'is_image': false,
+            'url': 'https://example.com/api/v1/files/activity-files/9?signature=y',
+          },
+        ],
+      });
+
+      expect(activity.files.length, 2);
+      expect(activity.files.first.isImage, isTrue);
+      expect(activity.files.first.sizeLabel, '178 KB');
+      expect(activity.files.last.isPdf, isTrue);
+      expect(activity.files.last.isImage, isFalse);
+    });
+
+    test('غياب الحقل يعني بلا مرفقات', () {
+      expect(ActivityFile.listFrom(null), isEmpty);
+      expect(
+        Activity.fromJson(<String, dynamic>{'id': 1, 'student': <String, dynamic>{}}).files,
+        isEmpty,
+      );
+    });
+  });
 }

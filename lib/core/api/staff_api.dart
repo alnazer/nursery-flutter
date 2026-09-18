@@ -210,6 +210,25 @@ class StaffApi {
     return data is Map<String, dynamic> ? data : <String, dynamic>{};
   }
 
+  /// رفع مرفقات لنشاط (صور أو PDF، حتى 5 لكل نشاط).
+  Future<List<ActivityFile>> uploadActivityFiles(int activityId, List<UploadFile> files) async {
+    final dynamic data = await _client.upload(
+      '/student-activities/$activityId/files',
+      files: files.map((UploadFile file) => UploadFile(
+            field: 'files[]',
+            filename: file.filename,
+            bytes: file.bytes,
+            contentType: file.contentType,
+          )).toList(),
+    );
+
+    return data is Map ? ActivityFile.listFrom(data['files']) : <ActivityFile>[];
+  }
+
+  /// حذف مرفق من نشاط غير منشور.
+  Future<void> deleteActivityFile(int activityId, int fileId) =>
+      _client.delete('/student-activities/$activityId/files/$fileId');
+
   /// تعديل نشاط قبل نشره — تُستبدل البنود كلها.
   Future<Map<String, dynamic>> updateActivity({
     required int id,

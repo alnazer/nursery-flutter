@@ -1479,4 +1479,31 @@ class AppL10nAr extends AppL10n {
 
   @override
   String get studentActions => 'إجراءات الطالب';
+
+  @override
+  String get attachAdd => 'إضافة مرفق';
+
+  @override
+  String get attachCamera => 'التقاط صورة';
+
+  @override
+  String get attachGallery => 'من معرض الصور';
+
+  @override
+  String attachHint(String max) {
+    return 'صور أو PDF، حتى $max مرفقات.';
+  }
+
+  @override
+  String attachmentsCount(String count) {
+    return 'المرفقات ($count)';
+  }
+
+  @override
+  String attachmentsLimit(String max) {
+    return 'الحد الأقصى $max مرفقات.';
+  }
+
+  @override
+  String get download => 'تحميل';
 }

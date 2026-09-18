@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../api/api_client.dart';
 
@@ -26,6 +27,34 @@ Future<UploadFile?> pickUploadFile({
     filename: file.name,
     bytes: bytes,
     contentType: mimeForExtension(file.extension),
+  );
+}
+
+/// التقاط صورة بالكاميرا أو اختيارها من المعرض.
+/// تُصغَّر الصورة قبل الرفع (1600 بكسل وجودة 85%) فلا تُرفع صور ضخمة من الجوال.
+Future<UploadFile?> pickImageFile({
+  required String field,
+  required bool camera,
+  int maxWidth = 1600,
+  int quality = 85,
+}) async {
+  final XFile? picked = await ImagePicker().pickImage(
+    source: camera ? ImageSource.camera : ImageSource.gallery,
+    maxWidth: maxWidth.toDouble(),
+    imageQuality: quality,
+  );
+  if (picked == null) {
+    return null;
+  }
+  final List<int> bytes = await picked.readAsBytes();
+  final String name = picked.name.isEmpty ? 'photo.jpg' : picked.name;
+  final String extension = name.contains('.') ? name.split('.').last : 'jpg';
+
+  return UploadFile(
+    field: field,
+    filename: name,
+    bytes: bytes,
+    contentType: picked.mimeType ?? mimeForExtension(extension),
   );
 }
 

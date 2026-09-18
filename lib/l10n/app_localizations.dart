@@ -2866,6 +2866,48 @@ abstract class AppL10n {
   /// In ar, this message translates to:
   /// **'إجراءات الطالب'**
   String get studentActions;
+
+  /// No description provided for @attachAdd.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة مرفق'**
+  String get attachAdd;
+
+  /// No description provided for @attachCamera.
+  ///
+  /// In ar, this message translates to:
+  /// **'التقاط صورة'**
+  String get attachCamera;
+
+  /// No description provided for @attachGallery.
+  ///
+  /// In ar, this message translates to:
+  /// **'من معرض الصور'**
+  String get attachGallery;
+
+  /// No description provided for @attachHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صور أو PDF، حتى {max} مرفقات.'**
+  String attachHint(String max);
+
+  /// No description provided for @attachmentsCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرفقات ({count})'**
+  String attachmentsCount(String count);
+
+  /// No description provided for @attachmentsLimit.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحد الأقصى {max} مرفقات.'**
+  String attachmentsLimit(String max);
+
+  /// No description provided for @download.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحميل'**
+  String get download;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

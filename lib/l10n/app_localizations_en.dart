@@ -1479,4 +1479,31 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get studentActions => 'Student actions';
+
+  @override
+  String get attachAdd => 'Add attachment';
+
+  @override
+  String get attachCamera => 'Take a photo';
+
+  @override
+  String get attachGallery => 'From gallery';
+
+  @override
+  String attachHint(String max) {
+    return 'Images or PDF, up to $max files.';
+  }
+
+  @override
+  String attachmentsCount(String count) {
+    return 'Attachments ($count)';
+  }
+
+  @override
+  String attachmentsLimit(String max) {
+    return 'At most $max attachments.';
+  }
+
+  @override
+  String get download => 'Download';
 }

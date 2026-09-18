@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/api/api_failure.dart';
 import '../../../core/api/staff_api.dart';
+import '../../../core/models/parent_models.dart';
 import '../../../core/models/staff_models.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/util/formatters.dart';
@@ -187,6 +188,7 @@ class _ActivityRow extends StatelessWidget {
         avatarUrl: activity.studentAvatar,
         values: values,
         note: '${full['note'] ?? activity.note}',
+        files: ActivityFile.listFrom(full['files']),
       ));
       if (saved == true) {
         cubit.load(refresh: true);

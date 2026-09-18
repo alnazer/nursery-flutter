@@ -85,6 +85,8 @@ class _NurseryAppState extends State<NurseryApp> {
         RepositoryProvider<SessionStore>.value(value: _store),
         RepositoryProvider<ParentApi>.value(value: _parentApi),
         RepositoryProvider<StaffApi>.value(value: _staffApi),
+        // يلزم تنزيل المرفقات بروابطها الموقّعة (بلا ترويسات التطبيق)
+        RepositoryProvider<ApiClient>.value(value: _client),
       ],
       child: MultiBlocProvider(
         providers: [

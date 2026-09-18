@@ -48,6 +48,10 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>يُستخدم Face ID لتسجيل دخولك بسرعة وأمان.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>تُستخدم الكاميرا لمسح بطاقة الطفل عند الحضور والانصراف.</string>
+	<string>تُستخدم الكاميرا لمسح بطاقة الطفل عند الحضور والانصراف، ولالتقاط صور أنشطة اليوم.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>لاختيار صور من معرضك وإرفاقها بنشاط الطفل أو صورته الشخصية.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>لحفظ المرفقات والبطاقات في معرض الصور.</string>
 </dict>
 </plist>
