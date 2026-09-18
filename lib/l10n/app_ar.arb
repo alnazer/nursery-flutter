@@ -1,0 +1,788 @@
+{
+  "@@locale": "ar",
+  "appNameParent": "حضانتي",
+  "appNameStaff": "حضانتي - المشرفات",
+  "tagline": "تابِع يوم طفلك لحظة بلحظة",
+  "taglineStaff": "يومك مع الأطفال في مكان واحد",
+  "languageSwitch": "English",
+  "continueLabel": "متابعة",
+  "signIn": "تسجيل الدخول",
+  "cancel": "إلغاء",
+  "retry": "إعادة المحاولة",
+  "close": "إغلاق",
+  "later": "لاحقاً",
+  "loginTitle": "تسجيل الدخول",
+  "loginSubtitleMobile": "أدخل رقم الجوال المسجّل لدى الحضانة.",
+  "loginSubtitlePassword": "أدخل بيانات الدخول الخاصة بك.",
+  "loginSubtitleStaff": "ادخلي باسم المستخدم وكلمة المرور كما في لوحة التحكم.",
+  "mobileLabel": "رقم الجوال",
+  "identifierLabel": "اسم المستخدم أو البريد",
+  "usernameLabel": "اسم المستخدم",
+  "passwordLabel": "كلمة المرور",
+  "smsNote": "سنرسل رمز تحقق برسالة نصية إلى هذا الرقم. لا نشارك رقمك مع أحد.",
+  "notRegistered": "رقمك غير مسجّل؟ تواصل مع الحضانة",
+  "forgotPassword": "نسيت كلمة المرور؟",
+  "forgotTitle": "إعادة تعيين كلمة المرور",
+  "forgotSubtitle": "أدخل بريدك المسجّل وسنرسل لك رابط التعيين.",
+  "emailLabel": "البريد الإلكتروني",
+  "send": "إرسال",
+  "forgotSent": "إن كان البريد مسجّلاً فستصلك رسالة خلال دقائق.",
+  "otpTitle": "رمز التحقق",
+  "otpSubtitle": "أدخل الرمز المرسل إلى {target}",
+  "@otpSubtitle": {
+    "placeholders": {
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "otpCodeLabel": "الرمز",
+  "verify": "تأكيد",
+  "resend": "إعادة إرسال الرمز",
+  "resendIn": "إعادة الإرسال بعد {seconds} ثانية",
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "otpSent": "أرسلنا رمزاً جديداً.",
+  "biometricLabel": "الدخول بالبصمة",
+  "biometricHint": "البصمة مفعّلة لـ {name} — المس زر البصمة للدخول مباشرة",
+  "@biometricHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "biometricPromptTitle": "تسجيل الدخول",
+  "biometricPromptSubtitle": "استخدم بصمتك للدخول إلى حسابك",
+  "biometricEnableTitle": "تفعيل الدخول بالبصمة",
+  "biometricEnableBody": "ادخل في المرة القادمة ببصمتك بدل كتابة بياناتك. بصمتك لا تغادر جهازك.",
+  "biometricEnableAction": "تفعيل البصمة",
+  "biometricEnabled": "تم تفعيل الدخول بالبصمة على هذا الجهاز.",
+  "biometricDisabled": "أوقفنا الدخول بالبصمة على هذا الجهاز.",
+  "biometricFailedTitle": "تعذّر التحقق من البصمة",
+  "biometricRetry": "حاول مرة أخرى أو ادخل بالطريقة المعتادة.",
+  "biometricRevoked": "أُلغي الدخول بالبصمة على هذا الجهاز. سجّل الدخول بالطريقة المعتادة.",
+  "biometricLocked": "أُقفلت البصمة مؤقتاً بعد محاولات كثيرة. ادخل بالطريقة المعتادة.",
+  "biometricNotEnrolled": "لا توجد بصمة مسجّلة على هذا الجهاز. سجّلها من إعدادات الجهاز أولاً.",
+  "biometricUnavailable": "هذا الجهاز لا يدعم الدخول بالبصمة.",
+  "biometricReauth": "لتفعيل البصمة أعد تسجيل الدخول أولاً.",
+  "networkError": "تعذّر الاتصال بالخادم. تحقّق من الإنترنت ثم أعد المحاولة.",
+  "serverError": "حدث خطأ غير متوقع. حاول مرة أخرى.",
+  "configMissing": "لم يُضبط مفتاح التطبيق. شغّل التطبيق مع ‎--dart-define‎ للمفاتيح.",
+  "maintenanceTitle": "التطبيق تحت الصيانة",
+  "maintenanceBody": "نعمل على تحسينات سريعة. حاول بعد قليل.",
+  "updateTitle": "حدّث التطبيق",
+  "updateBody": "هذه النسخة لم تعد مدعومة. حدّث التطبيق للمتابعة.",
+  "updateAction": "تحديث الآن",
+  "accountBlockedTitle": "الحساب موقوف عن التطبيق",
+  "accountBlockedBody": "تواصل مع إدارة الحضانة لمعرفة التفاصيل.",
+  "accountInactiveTitle": "الحساب غير نشِط",
+  "accountInactiveBody": "تواصل مع إدارة الحضانة لتفعيل حسابك.",
+  "tooManyTitle": "محاولات كثيرة",
+  "tooManyBody": "حاول بعد {minutes} دقيقة.",
+  "@tooManyBody": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "smsUnavailable": "خدمة الرسائل غير متاحة حالياً. تواصل مع الحضانة.",
+  "otpUnavailable": "لا يوجد بريد مسجّل لحسابك لإرسال الرمز. تواصل مع الإدارة.",
+  "sessionExpiredTitle": "انتهت الجلسة",
+  "sessionExpiredBody": "سجّل الدخول من جديد للمتابعة.",
+  "signOut": "تسجيل الخروج",
+  "signOutForget": "تسجيل الخروج وإيقاف البصمة",
+  "staffReplacedDevices": "تم إخراج جهازك السابق — تطبيق المشرفات يعمل على جهاز واحد.",
+  "welcome": "أهلاً {name}",
+  "@welcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeParentTitle": "الرئيسية",
+  "homeStaffTitle": "اليوم",
+  "comingSoon": "بقية الشاشات قيد البناء.",
+  "securitySettings": "الأمان والبصمة",
+  "fieldRequired": "هذا الحقل مطلوب",
+  "navHome": "الرئيسية",
+  "navActivities": "الأنشطة",
+  "navPayments": "المدفوعات",
+  "navNotifications": "الإشعارات",
+  "navAccount": "حسابي",
+  "navToday": "اليوم",
+  "navStudents": "الطلاب",
+  "statusPresent": "حاضر الآن",
+  "statusCheckedOut": "انصرف",
+  "statusAbsent": "غائب اليوم",
+  "statusClosed": "اليوم عطلة",
+  "statusNotArrived": "لم يصل بعد",
+  "arrivedAt": "وصل {time}",
+  "@arrivedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "leftAt": "انصرف {time}",
+  "@leftAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "childCard": "ملف الطفل",
+  "pendingTitle": "بانتظارك",
+  "payNow": "ادفع الآن",
+  "acknowledge": "اطّلعت",
+  "acknowledged": "تم الاطلاع",
+  "needsAck": "تعميم يحتاج موافقتك",
+  "dueOn": "مستحقة {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "overdue": "متأخرة",
+  "servicesTitle": "الخدمات",
+  "serviceAttendance": "الحضور",
+  "serviceInvoices": "الفواتير",
+  "serviceCirculars": "التعاميم",
+  "serviceEvents": "الفعاليات",
+  "serviceCoupons": "قسائمي",
+  "todayActivity": "نشاط اليوم",
+  "viewAll": "عرض الكل",
+  "noActivityYet": "لا يوجد نشاط منشور بعد.",
+  "activitiesTitle": "الأنشطة",
+  "notificationsTitle": "الإشعارات",
+  "invoicesTitle": "الفواتير",
+  "circularsTitle": "التعاميم",
+  "markAllRead": "تعليم الكل كمقروء",
+  "emptyList": "لا يوجد شيء هنا بعد.",
+  "loadMore": "عرض المزيد",
+  "invoiceNumber": "فاتورة رقم {number}",
+  "@invoiceNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "invoiceItems": "بنود الفاتورة",
+  "attendanceTitle": "الحضور اليوم",
+  "statExpected": "متوقّع",
+  "statIn": "حضر",
+  "statOut": "انصرف",
+  "statAbsent": "غائب",
+  "statRemaining": "متبقٍ",
+  "activitiesBoard": "الأنشطة",
+  "statAdded": "أُضيف",
+  "statPublished": "منشور",
+  "statMissing": "ناقص",
+  "windowOpenNow": "نافذة إضافة الأنشطة مفتوحة الآن.",
+  "windowOpensIn": "يُفتح بعد",
+  "windowClosesIn": "يُغلق بعد",
+  "windowUpdating": "يجري تحديث حالة النافذة…",
+  "windowHoursNote": "ساعات الإضافة {hours}",
+  "@windowHoursNote": {
+    "placeholders": {
+      "hours": {
+        "type": "String"
+      }
+    }
+  },
+  "windowReopensAt": "يُعاد الفتح الساعة {time}",
+  "@windowReopensAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "windowClosesAt": "يُغلق الساعة {time}",
+  "@windowClosesAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "pickStudent": "اختر طالباً",
+  "windowClosed": "نافذة إضافة الأنشطة مغلقة الآن.",
+  "studentsTitle": "الطلاب",
+  "searchHint": "ابحث بالاسم",
+  "scanTitle": "مسح البطاقة",
+  "attendanceMonthTitle": "الحضور والغياب",
+  "attendanceRate": "نسبة الحضور {rate}%",
+  "@attendanceRate": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "schoolDays": "أيام الدراسة",
+  "absentDays": "أيام الغياب",
+  "excusedDays": "بعذر",
+  "unexcusedDays": "بلا عذر",
+  "reportAbsence": "بلّغ عن غياب",
+  "absenceFrom": "من تاريخ",
+  "absenceTo": "إلى تاريخ",
+  "absenceNote": "السبب",
+  "absenceSaved": "سجّلنا البلاغ.",
+  "absenceCancel": "إلغاء البلاغ",
+  "absenceCancelled": "أُلغي البلاغ.",
+  "upcomingAbsences": "بلاغات قادمة",
+  "notesTitle": "ملاحظات المعلّمة",
+  "devicesTitle": "أجهزتي",
+  "deviceCurrent": "هذا الجهاز",
+  "deviceSignOut": "إخراج الجهاز",
+  "deviceSignedOut": "أُخرج الجهاز.",
+  "lastUsed": "آخر استخدام {time}",
+  "@lastUsed": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "staffAttendanceTitle": "حضور اليوم",
+  "markAbsentAction": "تسجيل غياب من لم يصل",
+  "markAbsentConfirm": "سيُسجّل غياب كل من لم يصل اليوم. متابعة؟",
+  "confirm": "تأكيد",
+  "filterAll": "الكل",
+  "filterNotArrived": "لم يصل",
+  "filterPresent": "حاضر",
+  "filterAbsent": "غائب",
+  "selectChild": "اختر الطفل",
+  "pickDate": "اختر التاريخ",
+  "eventsTitle": "الفعاليات",
+  "bookingsTitle": "حجوزاتي",
+  "seatsLeft": "{count} مقعد متبقٍ",
+  "@seatsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "priceFrom": "تبدأ من {price}",
+  "@priceFrom": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "eventProgram": "البرنامج",
+  "eventChildren": "الأبناء",
+  "eligible": "مؤهّل للحجز",
+  "notEligible": "غير مؤهّل",
+  "booked": "محجوز",
+  "bookingSoon": "الحجز من التطبيق قيد الإضافة.",
+  "participantsCount": "{count} مشارك",
+  "@participantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelBooking": "إلغاء الحجز",
+  "bookingCancelled": "أُلغي الحجز.",
+  "cancelBookingConfirm": "سيُلغى هذا الحجز. متابعة؟",
+  "staffActivitiesTitle": "أنشطة الطلاب",
+  "addActivity": "إضافة نشاط",
+  "activityFor": "نشاط {name}",
+  "@activityFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "activityDay": "يوم النشاط {date}",
+  "@activityDay": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "activityNote": "ملاحظة المعلّمة",
+  "activityTemplates": "رسائل جاهزة",
+  "publishNow": "نشر مباشرة",
+  "saveActivity": "حفظ النشاط",
+  "activitySaved": "حُفظ النشاط.",
+  "activityExists": "لهذا الطالب نشاط في هذا اليوم.",
+  "activityBlocked": "لا يمكن إضافة نشاط الآن.",
+  "filterUnpublished": "بانتظار النشر",
+  "filterPublished": "منشور",
+  "publish": "نشر",
+  "published": "نُشر",
+  "publishAll": "نشر الكل",
+  "publishedCount": "نُشر {count} نشاطاً.",
+  "@publishedCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "addedBy": "أضافه {name}",
+  "@addedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "missingActivity": "بلا نشاط",
+  "hrTitle": "خدماتي",
+  "hrPresentDays": "أيام الحضور",
+  "hrAbsentDays": "أيام الغياب",
+  "hrLeaveDays": "أيام الإجازة",
+  "hrLateMinutes": "دقائق التأخير",
+  "hrBalances": "أرصدة الإجازات",
+  "leavesTitle": "إجازاتي",
+  "newLeave": "طلب إجازة",
+  "leaveType": "نوع الإجازة",
+  "leaveReason": "السبب",
+  "leaveDaysCount": "{count} يوم",
+  "@leaveDaysCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveSubmitted": "أُرسل الطلب.",
+  "withdraw": "سحب الطلب",
+  "withdrawn": "سُحب الطلب.",
+  "violationsTitle": "مخالفاتي",
+  "justify": "تبرير",
+  "justification": "التبرير",
+  "justifySent": "أُرسل التبرير.",
+  "decisionDeadline": "آخر موعد {date}",
+  "@decisionDeadline": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesCount": "{count} دقيقة",
+  "@minutesCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "balanceDays": "{count} يوم متبقٍ",
+  "@balanceDays": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentsTitle": "مدفوعاتي",
+  "paymentOpen": "افتح صفحة الدفع",
+  "paymentOpened": "فُتحت صفحة الدفع في المتصفح. بعد إتمامها ارجع هنا واضغط «تحقّق من الحالة».",
+  "paymentCheck": "تحقّق من الحالة",
+  "paymentPaid": "تم الدفع بنجاح.",
+  "paymentFailed": "لم تكتمل عملية الدفع.",
+  "paymentPending": "العملية قيد التنفيذ.",
+  "receipt": "الإيصال",
+  "invoicesCount": "{count} فاتورة",
+  "@invoicesCount": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cannotOpenLink": "تعذّر فتح الرابط.",
+  "hrAttendanceTitle": "سجل حضوري",
+  "correctionsTitle": "طلبات التصحيح",
+  "newCorrection": "طلب تصحيح",
+  "correctionKind": "نوع البصمة",
+  "correctionIn": "دخول",
+  "correctionOut": "خروج",
+  "correctionTime": "الوقت الصحيح",
+  "correctionReason": "السبب",
+  "correctionSent": "أُرسل طلب التصحيح.",
+  "expectedHours": "الدوام {from} - {to}",
+  "@expectedHours": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "lateBy": "تأخير {count} د",
+  "@lateBy": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "earlyBy": "خروج مبكر {count} د",
+  "@earlyBy": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "requestCorrectionForDay": "اطلب تصحيحاً لهذا اليوم",
+  "absencesTitle": "الغياب",
+  "couponsTitle": "قسائمي",
+  "subscriptionsTitle": "الاشتراكات",
+  "profileTitle": "بياناتي",
+  "nameLabel": "الاسم",
+  "saveChanges": "حفظ التعديلات",
+  "profileSaved": "حُفظت بياناتك.",
+  "currentPassword": "كلمة المرور الحالية",
+  "currentPasswordHint": "مطلوبة لتغيير البريد.",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "resetPasswordHint": "سنرسل رابط التعيين إلى بريدك المسجّل.",
+  "couponValue": "خصم {value}",
+  "@couponValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "couponEnds": "ينتهي {date}",
+  "@couponEnds": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "couponFor": "لـ {names}",
+  "@couponFor": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionPeriod": "{from} إلى {to}",
+  "@subscriptionPeriod": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "daysLeft": "باقٍ {count} يوم",
+  "@daysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "currentSubscription": "الاشتراك الحالي",
+  "requestStop": "طلب إيقاف الاشتراك",
+  "requestStopReason": "سبب الإيقاف",
+  "requestStopSent": "أُرسل الطلب إلى الإدارة.",
+  "noChildSelected": "اختر الطفل أولاً",
+  "documentsTitle": "مستندات الطفل",
+  "documentsMissing": "ناقصة",
+  "documentsExpired": "منتهية",
+  "documentsExpiring": "قاربت الانتهاء",
+  "documentOpen": "فتح المستند",
+  "cardTitle": "بطاقة الطفل",
+  "cardHint": "اعرض هذا الرمز عند البوابة لتسجيل الحضور والانصراف.",
+  "weeklyTitle": "الملخص الأسبوعي",
+  "weeklyPresent": "أيام حضور",
+  "weeklyAbsent": "أيام غياب",
+  "weeklyActivities": "أنشطة",
+  "mediaConsent": "الموافقة على نشر الصور",
+  "mediaConsentOn": "مفعّلة",
+  "mediaConsentOff": "موقوفة",
+  "studentTitle": "ملف الطالب",
+  "addNote": "إضافة ملاحظة",
+  "notePositive": "إيجابية",
+  "noteNegative": "تحتاج متابعة",
+  "noteShare": "مشاركتها مع ولي الأمر",
+  "noteSaved": "حُفظت الملاحظة.",
+  "markAbsent": "تسجيل غياب",
+  "absenceExcused": "بعذر",
+  "absenceUnexcused": "بلا عذر",
+  "absenceSavedStaff": "سُجّل الغياب.",
+  "parentsLabel": "أولياء الأمر",
+  "teachersLabel": "المعلّمات",
+  "bookNow": "احجز الآن",
+  "bookingTitle": "حجز الفعالية",
+  "participants": "المشاركون",
+  "bookingContact": "بيانات التواصل",
+  "bookingAnswers": "بيانات الحجز",
+  "bookingAddons": "الإضافات",
+  "previewBooking": "معاينة المبلغ",
+  "bookingTotal": "الإجمالي {total}",
+  "@bookingTotal": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "bookingDiscount": "الخصم {amount}",
+  "@bookingDiscount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "willWait": "لا توجد مقاعد كافية — سيدخل الحجز قائمة الانتظار.",
+  "consentText": "أوافق على شروط المشاركة في الفعالية.",
+  "confirmBooking": "تأكيد الحجز",
+  "bookingCreated": "تم الحجز.",
+  "payBooking": "ادفع الحجز",
+  "fileFieldWeb": "هذا النموذج يطلب مرفقاً — أكمل الحجز من موقع الحضانة.",
+  "selectAtLeastOne": "اختر مشاركاً واحداً على الأقل.",
+  "quantity": "العدد",
+  "scanIn": "مسح الحضور",
+  "scanOut": "مسح الانصراف",
+  "scanAgain": "مسح بطاقة أخرى",
+  "scanMode": "نوع المسح",
+  "scanCancelled": "أُلغي المسح.",
+  "scanUnavailable": "الكاميرا غير متاحة على هذا الجهاز.",
+  "scanCardUnknown": "بطاقة غير معروفة.",
+  "attachFile": "إرفاق ملف",
+  "attachmentRequired": "هذا النوع يتطلب مرفقاً.",
+  "removeAttachment": "إزالة المرفق",
+  "addDocument": "رفع مستند",
+  "documentTitle": "اسم المستند",
+  "documentExpires": "تاريخ الانتهاء (اختياري)",
+  "documentUploaded": "رُفع المستند.",
+  "uploading": "جارٍ الرفع…",
+  "errorNotFoundTitle": "غير موجود",
+  "errorNotFoundBody": "لم نجد ما تبحث عنه. ربما حُذف أو تغيّر.",
+  "errorForbiddenTitle": "لا تملك صلاحية",
+  "errorForbiddenBody": "هذه الصفحة غير متاحة لحسابك. تواصل مع إدارة الحضانة.",
+  "errorNetworkTitle": "لا يوجد اتصال",
+  "errorServerTitle": "خطأ في الخادم",
+  "errorServerBody": "حدث خلل مؤقت عندنا. حاول بعد قليل.",
+  "errorValidationTitle": "تحقّق من البيانات",
+  "errorSessionTitle": "انتهت الجلسة",
+  "errorDetails": "تفاصيل فنية",
+  "retryIn": "حاول بعد {seconds} ثانية",
+  "@retryIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "goBack": "رجوع",
+  "errorConflictTitle": "تعذّر إتمام العملية",
+  "errorConfigTitle": "خطأ في إعداد التطبيق",
+  "errorConfigBody": "مفاتيح الاتصال بالخادم غير صحيحة. أبلغ المطوّر.",
+  "errorReauthTitle": "أعد تسجيل الدخول",
+  "errorTooLargeTitle": "الملف كبير",
+  "errorDemoTitle": "نسخة تجربة",
+  "errorGatewayTitle": "تعذّر الاتصال ببوابة الدفع",
+  "errorCardTitle": "بطاقة غير معروفة",
+  "errorAccountBlockedTitle": "الحساب موقوف",
+  "errorAccountInactiveTitle": "الحساب غير نشِط",
+  "cardFront": "الوجه الأمامي",
+  "cardBack": "الوجه الخلفي",
+  "cardDownload": "تحميل البطاقة",
+  "cardSaved": "حُفظت البطاقة",
+  "cardSaveCancelled": "أُلغي الحفظ",
+  "cardSaveFailed": "تعذّر إنشاء صورة البطاقة",
+  "minLengthHint": "{count} أحرف على الأقل",
+  "@minLengthHint": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "payslipsTitle": "راتبي",
+  "payslipsEmpty": "لا توجد قسائم رواتب معتمدة بعد.",
+  "payslipTitle": "قسيمة الراتب",
+  "payslipLast": "آخر راتب",
+  "payslipNet": "الصافي",
+  "payslipGross": "الإجمالي",
+  "payslipDeductions": "الاستقطاعات",
+  "payslipEarnings": "الاستحقاقات",
+  "payslipBasic": "الراتب الأساسي",
+  "payslipUnpaidDays": "أيام بلا أجر",
+  "payslipOvertime": "العمل الإضافي",
+  "payslipBank": "البنك",
+  "payslipPaidOn": "صُرف في {date}",
+  "@payslipPaidOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutTitle": "دفع المستحق",
+  "checkoutEmpty": "لا توجد فواتير مستحقة الآن.",
+  "checkoutTotal": "الإجمالي",
+  "checkoutSelected": "{count} فاتورة محدّدة",
+  "@checkoutSelected": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "checkoutBusy": "الفاتورة {number} يدفعها ولي أمر آخر الآن حتى {time}",
+  "@checkoutBusy": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentMethod": "طريقة الدفع",
+  "couponLabel": "كود الخصم",
+  "couponApply": "تطبيق",
+  "couponSuggested": "قسيمة متاحة {code} — خصم {amount}",
+  "@couponSuggested": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "couponUse": "استخدمها",
+  "invoicePdf": "تحميل الفاتورة",
+  "invoicePdfFailed": "تعذّر إنشاء نسخة الفاتورة.",
+  "editActivity": "تعديل النشاط",
+  "deleteActivity": "حذف النشاط",
+  "deleteActivityConfirm": "سيُحذف النشاط وبنوده. هل تريد المتابعة؟",
+  "activityDeleted": "حُذف النشاط",
+  "activityPublished": "نُشر النشاط",
+  "activityUnpublished": "أُلغي نشر النشاط",
+  "unpublish": "إلغاء النشر",
+  "delete": "حذف",
+  "allClassrooms": "كل الفصول",
+  "undoAbsence": "تراجع عن الغياب",
+  "undoAbsenceConfirm": "سيُحذف تسجيل غياب اليوم لهذا الطالب.",
+  "absenceRemoved": "حُذف تسجيل الغياب",
+  "filterUnread": "غير المقروءة",
+  "filterUnacked": "بانتظار التأكيد",
+  "filterDue": "المستحقة",
+  "filterPaid": "المدفوعة",
+  "filterUnpaid": "غير المدفوعة",
+  "filterExpired": "المنتهية",
+  "filterPending": "قيد التنفيذ",
+  "filterFailed": "المتعثّرة",
+  "filterCurrent": "السارية",
+  "filterUpcoming": "القادمة",
+  "filterUnviewed": "غير المشاهدة",
+  "filterForMyChildren": "لأبنائي",
+  "filterActive": "النشطة",
+  "filterConfirmed": "المؤكَّدة",
+  "filterCancelled": "الملغاة",
+  "eventTrip": "رحلات",
+  "eventActivity": "أنشطة",
+  "eventWorkshop": "ورش",
+  "eventCamp": "مخيّمات",
+  "eventCelebration": "حفلات",
+  "acceptBooking": "قبول الحجز",
+  "bookingAccepted": "قُبل الحجز",
+  "renewBooking": "تجديد المهلة",
+  "bookingRenewed": "جُدِّدت مهلة الدفع",
+  "bookingInvoice": "الفاتورة",
+  "surveyTitle": "تقييم الفعالية",
+  "surveySent": "شكراً لتقييمك",
+  "surveyAlreadySent": "أرسلتَ تقييماً سابقاً، والإرسال الآن يستبدله.",
+  "surveyNotes": "ملاحظات",
+  "attachments": "المرفقات",
+  "openAttachment": "فتح المرفق",
+  "downloading": "جارٍ التنزيل…",
+  "fileSaved": "حُفظ الملف",
+  "assignActivities": "إسناد أنشطة",
+  "activitiesAssigned": "أُسندت الأنشطة",
+  "couponAccepted": "خصم {discount} — الإجمالي بعد الخصم {total}",
+  "@couponAccepted": {
+    "placeholders": {
+      "discount": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "activityPdf": "تحميل تقرير اليوم",
+  "disablePush": "إيقاف إشعارات هذا الجهاز",
+  "pushDisabled": "أُوقفت إشعارات هذا الجهاز",
+  "filterEveryone": "الجميع",
+  "filterMine": "ما أضفتُه",
+  "copy": "نسخ",
+  "couponCopied": "نُسخ الكود",
+  "couponNoInvoices": "لا توجد فواتير مستحقة يصلح لها هذا الكوبون.",
+  "showInvoice": "عرض الفاتورة",
+  "allChildren": "كل الأبناء",
+  "scanHint": "امسحي بطاقة الطفل من تبويب «الحضور» لتسجيل الدخول أو الانصراف.",
+  "showAmounts": "إظهار المبالغ",
+  "hideAmounts": "إخفاء المبالغ",
+  "leaveTypesEmpty": "لا توجد أنواع إجازات مفعّلة حالياً. راجعي إدارة النظام.",
+  "balancesEmpty": "لا توجد أرصدة إجازات مسجّلة على ملفك.",
+  "withdrawLeaveConfirm": "سيُسحب طلب الإجازة ولن يُعرض على الإدارة. متابعة؟",
+  "working": "جارٍ التنفيذ…",
+  "scanSending": "جارٍ إرسال البطاقة…",
+  "markAbsentBusy": "جارٍ تسجيل الغياب…",
+  "formHiddenUntilOpen": "يظهر نموذج الإضافة تلقائياً فور فتح النافذة.",
+  "changePhoto": "تغيير الصورة",
+  "photoUploading": "جارٍ رفع الصورة…",
+  "photoUpdated": "تم تحديث الصورة",
+  "markPresent": "تحضير",
+  "markPresentNote": "تسجيل وصول الطالب الآن وإلغاء غياب اليوم إن وُجد.",
+  "markCheckedOut": "تسجيل انصراف",
+  "markCheckedOutNote": "تسجيل مغادرة الطالب الآن.",
+  "markUnexcused": "غياب بدون عذر",
+  "markUnexcusedNote": "يُسجَّل غياباً ويُبلَّغ ولي الأمر.",
+  "markExcused": "غياب بعذر",
+  "markExcusedNote": "يُطلب سبب الغياب ثم يُسجَّل ويُبلَّغ ولي الأمر.",
+  "markAbsentOneConfirm": "سيُسجَّل غياب {name} اليوم ويُبلَّغ ولي الأمر. متابعة؟",
+  "@markAbsentOneConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "absenceReason": "سبب الغياب",
+  "saved": "تم الحفظ",
+  "studentActions": "إجراءات الطالب"
+}

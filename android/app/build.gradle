@@ -1,0 +1,61 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.nursery.nursery"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.nursery.nursery"
+        // البصمة عبر android.hardware.biometrics.BiometricPrompt تحتاج Android 10 فأعلى
+        minSdk = 29
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    // نسختان من نفس الكود: تطبيق ولي الأمر وتطبيق المشرفات
+    flavorDimensions "app"
+    productFlavors {
+        parent {
+            dimension "app"
+            applicationId = "com.nursery.parent"
+            resValue "string", "app_name", "حضانتي"
+        }
+        staff {
+            dimension "app"
+            applicationId = "com.nursery.staff"
+            resValue "string", "app_name", "حضانتي - المشرفات"
+        }
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    // ماسح الأكواد من خدمات Google: واجهة مسح جاهزة بلا كاميرا مخصّصة ولا حزمة Flutter
+    implementation "com.google.android.gms:play-services-code-scanner:16.1.0"
+}
+
+flutter {
+    source = "../.."
+}

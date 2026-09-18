@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ولي الأمر (parent)" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="buildFlavor" value="parent" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main_parent.dart" />
+    <option name="additionalArgs" value="--dart-define=API_BASE_URL=https://nursery.local --dart-define=PARENT_API_KEY=ضع-المفتاح --dart-define=PARENT_API_SECRET=ضع-كلمة-السر" />
+    <method v="2" />
+  </configuration>
+</component>

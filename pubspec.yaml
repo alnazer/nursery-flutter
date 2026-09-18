@@ -1,0 +1,37 @@
+name: nursery
+description: "تطبيق الحضانة — ولي الأمر والمشرفات"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # إدارة الحالة: Cubit/BLoC
+  flutter_bloc: ^8.1.6
+
+  # توقيع HMAC-SHA256 لطلبات الـ API (من فريق Dart)
+  crypto: ^3.0.6
+
+  # اختيار الملفات والصور للمرفقات (مستندات الطالب، الإجازات، التبريرات)
+  file_picker: ^8.1.2
+
+  # مطلوبة لتوليد ملفات الترجمة
+  intl: any
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true

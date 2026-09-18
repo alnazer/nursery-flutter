@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="المشرفات (staff)" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="buildFlavor" value="staff" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main_staff.dart" />
+    <option name="additionalArgs" value="--dart-define=API_BASE_URL=https://nursery.local --dart-define=STAFF_API_KEY=ضع-المفتاح --dart-define=STAFF_API_SECRET=ضع-كلمة-السر" />
+    <method v="2" />
+  </configuration>
+</component>
