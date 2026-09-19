@@ -15,6 +15,7 @@ class ParentHomeState {
     this.pendingInvoice,
     this.pendingAnnouncement,
     this.unreadNotifications = 0,
+    this.badges = const <String, int>{},
   });
 
   final bool loading;
@@ -25,6 +26,9 @@ class ParentHomeState {
   final Invoice? pendingInvoice;
   final Announcement? pendingAnnouncement;
   final int unreadNotifications;
+
+  /// عدّادات بطاقات الخدمات: المفتاح اسم الخدمة والقيمة عدد ما ينتظر تصرّفاً.
+  final Map<String, int> badges;
 
   Child? get selectedChild {
     if (children.isEmpty) {
@@ -52,6 +56,7 @@ class ParentHomeState {
     Announcement? pendingAnnouncement,
     bool clearAnnouncement = false,
     int? unreadNotifications,
+    Map<String, int>? badges,
   }) =>
       ParentHomeState(
         loading: loading ?? this.loading,
@@ -62,6 +67,7 @@ class ParentHomeState {
         pendingInvoice: clearInvoice ? null : pendingInvoice ?? this.pendingInvoice,
         pendingAnnouncement: clearAnnouncement ? null : pendingAnnouncement ?? this.pendingAnnouncement,
         unreadNotifications: unreadNotifications ?? this.unreadNotifications,
+        badges: badges ?? this.badges,
       );
 }
 
@@ -126,6 +132,11 @@ class ParentHomeCubit extends Cubit<ParentHomeState> {
       emit(state.copyWith(unreadNotifications: (notifications.meta['unread'] as int?) ?? 0));
     } on ApiFailure {
       // عدّاد الجرس اختياري
+    }
+    try {
+      emit(state.copyWith(badges: await api.badges()));
+    } on ApiFailure {
+      // الشارات زينة: غيابها لا يغيّر الشاشة
     }
   }
 

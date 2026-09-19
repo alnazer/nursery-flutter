@@ -442,6 +442,19 @@ class ParentApi {
     return data is Map<String, dynamic> ? data : <String, dynamic>{};
   }
 
+  /// عدّادات بطاقات الخدمات في الرئيسية (ما يحتاج انتباهاً فقط).
+  Future<Map<String, int>> badges() async {
+    final dynamic data = await _client.get('/badges');
+    if (data is! Map) {
+      return <String, int>{};
+    }
+
+    return <String, int>{
+      for (final MapEntry<dynamic, dynamic> entry in data.entries)
+        if (entry.value is num) '${entry.key}': (entry.value as num).toInt(),
+    };
+  }
+
   /// تغيير صورتي الشخصية — يعيد رابط الصورة الجديد.
   Future<String> updateAvatar(UploadFile file) async {
     final dynamic data = await _client.upload('/me/avatar', files: <UploadFile>[file]);

@@ -8,6 +8,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../core/util/formatters.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/child_avatar.dart';
+import '../../common/notification_badge.dart';
 import '../../common/list_views.dart';
 import '../../session/session_cubit.dart';
 import '../cubit/parent_home_cubit.dart';
@@ -89,7 +90,7 @@ class _ParentHomeView extends StatelessWidget {
               const SizedBox(height: 22),
               Text(l10n.servicesTitle, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: colors.ink)),
               const SizedBox(height: 10),
-              const _ServicesGrid(),
+              _ServicesGrid(badges: state.badges),
               const SizedBox(height: 22),
               Row(
                 children: <Widget>[
@@ -153,14 +154,10 @@ class _Header extends StatelessWidget {
               icon: Icon(Icons.notifications_none, color: colors.ink),
             ),
             if (unread > 0)
-              Positioned(
-                right: 6,
-                top: 6,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                  decoration: BoxDecoration(color: colors.coral, borderRadius: BorderRadius.circular(999)),
-                  child: Text('$unread', style: const TextStyle(color: Colors.white, fontSize: 11)),
-                ),
+              PositionedDirectional(
+                end: 4,
+                top: 4,
+                child: NotificationBadge(count: unread),
               ),
           ],
         ),
@@ -340,21 +337,25 @@ class _PendingAnnouncement extends StatelessWidget {
 }
 
 class _ServicesGrid extends StatelessWidget {
-  const _ServicesGrid();
+  const _ServicesGrid({required this.badges});
+
+  /// مفاتيحها أسماء الخدمات كما يرسلها `GET /parent/badges`.
+  final Map<String, int> badges;
 
   @override
   Widget build(BuildContext context) {
     final AppL10n l10n = AppL10n.of(context);
     final List<_Service> services = <_Service>[
-      _Service(l10n.activitiesTitle, Icons.auto_awesome_outlined, () => ActivitiesPage.route()),
-      _Service(l10n.absencesTitle, Icons.event_busy_outlined, () => AbsencesPage.route()),
-      _Service(l10n.serviceInvoices, Icons.receipt_long_outlined, () => InvoicesPage.route()),
-      _Service(l10n.subscriptionsTitle, Icons.card_membership_outlined, () => SubscriptionsPage.route()),
-      _Service(l10n.couponsTitle, Icons.local_offer_outlined, () => CouponsPage.route()),
-      _Service(l10n.serviceCirculars, Icons.campaign_outlined, () => CircularsPage.route()),
-      _Service(l10n.serviceEvents, Icons.celebration_outlined, () => EventsPage.route()),
-      _Service(l10n.bookingsTitle, Icons.confirmation_number_outlined, () => BookingsPage.route()),
-      _Service(l10n.notificationsTitle, Icons.notifications_none, () => NotificationsPage.route()),
+      _Service('activities', l10n.activitiesTitle, Icons.auto_awesome_outlined, () => ActivitiesPage.route()),
+      _Service('absences', l10n.absencesTitle, Icons.event_busy_outlined, () => AbsencesPage.route()),
+      _Service('invoices', l10n.serviceInvoices, Icons.receipt_long_outlined, () => InvoicesPage.route()),
+      _Service('subscriptions', l10n.subscriptionsTitle, Icons.card_membership_outlined,
+          () => SubscriptionsPage.route()),
+      _Service('coupons', l10n.couponsTitle, Icons.local_offer_outlined, () => CouponsPage.route()),
+      _Service('circulars', l10n.serviceCirculars, Icons.campaign_outlined, () => CircularsPage.route()),
+      _Service('events', l10n.serviceEvents, Icons.celebration_outlined, () => EventsPage.route()),
+      _Service('bookings', l10n.bookingsTitle, Icons.confirmation_number_outlined, () => BookingsPage.route()),
+      _Service('notifications', l10n.notificationsTitle, Icons.notifications_none, () => NotificationsPage.route()),
     ];
 
     return GridView.count(
@@ -364,45 +365,70 @@ class _ServicesGrid extends StatelessWidget {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       childAspectRatio: 0.9,
-      children: services.map((_Service service) => _ServiceTile(service: service)).toList(),
+      children: services
+          .map((_Service service) => _ServiceTile(service: service, count: badges[service.key] ?? 0))
+          .toList(),
     );
   }
 }
 
 class _Service {
-  const _Service(this.title, this.icon, this.route);
+  const _Service(this.key, this.title, this.icon, this.route);
 
+  /// مفتاح الخدمة في رد العدّادات.
+  final String key;
   final String title;
   final IconData icon;
   final Route<void> Function() route;
 }
 
 class _ServiceTile extends StatelessWidget {
-  const _ServiceTile({required this.service});
+  const _ServiceTile({required this.service, this.count = 0});
 
   final _Service service;
+
+  /// عدد ما ينتظر تصرّفاً في هذه الخدمة (صفر = بلا شارة).
+  final int count;
 
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.colors;
+    final bool flagged = count > 0;
 
-    return AppCard(
-      padding: const EdgeInsets.all(8),
-      onTap: () => Navigator.of(context).push(service.route()),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(service.icon, color: colors.primaryInk),
-          const SizedBox(height: 6),
-          Text(
-            service.title,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 12, color: colors.ink),
+    return Stack(
+      // البطاقة تملأ خانة الشبكة كما كانت قبل إضافة الشارة
+      fit: StackFit.expand,
+      clipBehavior: Clip.none,
+      children: <Widget>[
+        AppCard(
+          padding: const EdgeInsets.all(8),
+          onTap: () => Navigator.of(context).push(service.route()),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(service.icon, color: flagged ? colors.primary : colors.primaryInk),
+              const SizedBox(height: 6),
+              Text(
+                service.title,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: colors.ink,
+                  fontWeight: flagged ? FontWeight.w700 : FontWeight.w400,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        if (flagged)
+          PositionedDirectional(
+            top: -4,
+            end: -4,
+            child: NotificationBadge(count: count),
+          ),
+      ],
     );
   }
 }
